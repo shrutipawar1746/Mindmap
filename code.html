@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Machine Learning – Unit III, IV, V Mind Maps</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--tx:#1b2233;--sub:#4a5470;--line:#c3cadb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141f;--card:#1a2030;--tx:#eef1fa;--sub:#aab3cc;--line:#3a4460}}
+:root[data-theme="dark"]{--bg:#10141f;--card:#1a2030;--tx:#eef1fa;--sub:#aab3cc;--line:#3a4460}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:18px 20px 6px;text-align:center}
+h1{margin:0;font-size:1.5rem}
+.tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px}
+.tabs button{border:2px solid var(--c);background:var(--card);color:var(--tx);padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer;font-size:.9rem}
+.tabs button.on{background:var(--c);color:#fff}
+#wrap{overflow:hidden;padding:0 10px}
+#map{position:relative;transform-origin:0 0;border-radius:28px;background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--c) 14%,var(--card)),var(--card) 75%);box-shadow:0 6px 30px #0002}
+svg{position:absolute;inset:0}
+.n{position:absolute;box-sizing:border-box}
+.ctr{border-radius:50%;background:var(--c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;box-shadow:0 0 0 12px color-mix(in srgb,var(--c) 25%,transparent),0 10px 26px #0004}
+.ctr b{font-size:1.45rem;line-height:1.1}.ctr small{margin-top:8px;font-size:.78rem;opacity:.95}
+.grp{border-radius:30px;background:var(--c);color:#fff;display:flex;align-items:center;gap:8px;padding:0 14px;font-weight:700;font-size:.95rem;box-shadow:0 4px 12px #0003}
+.grp i{font-style:normal;background:#fff;color:var(--c);border-radius:50%;min-width:24px;height:24px;display:grid;place-items:center;font-size:.8rem}
+.card{background:var(--card);border:2px solid var(--c);border-radius:16px;padding:8px 12px;box-shadow:0 3px 10px #0002;display:flex;gap:10px;align-items:flex-start}
+.card .ic{font-size:1.5rem;line-height:1.2}
+.card h4{margin:0 0 3px;font-size:.88rem;color:var(--c)}
+.card p{margin:0;font-size:.8rem;line-height:1.3;color:var(--sub)}.card b{color:var(--tx)}
+.flow{max-width:1500px;margin:14px auto;padding:12px 18px;border-radius:16px;background:var(--card);border-left:6px solid var(--c);font-size:.9rem}
+</style></head><body>
+<header><h1>🧠 Machine Learning – Study Mind Maps</h1><div style="color:var(--sub);font-size:.9rem">Pick a unit. Numbered bubbles follow the syllabus order.</div></header>
+<div class="tabs" id="tabs"></div>
+<div id="wrap"><div id="map"></div></div>
+<div class="flow" id="flow"></div>
+<script>
+const U=[
+{id:"III",c:"#2563eb",name:"Machine Learning Fundamentals and Supervised Learning",h:"09 Hours",
+flow:"🔗 <b>How it connects:</b> Collect data → Preprocess → Split (train/validate/test) → Pick Regression or Classification → Evaluate with metrics → Apply in case studies.",
+g:[["🚀","Getting Started",[["🤖","Introduction to Machine Learning","Teaching computers to learn **patterns from data** instead of fixed rules."],["🔄","ML Workflow and Lifecycle","The **step-by-step journey** from problem to deployed, monitored model."],["🗂️","Data Collection and Dataset Preparation","**Gathering raw data** and organising it into a clean, usable dataset."]]],
+["🧹","Data Preprocessing",[["🕳️","Handling Missing Values","**Filling or removing** blank entries, e.g. replace with the column mean."],["📏","Feature Scaling","Bringing features to a **similar range**, e.g. 0 to 1, so none dominates."],["🔢","Encoding Techniques","Converting **text categories into numbers**, like Red→0 and Blue→1."]]],
+["🎯","Learning Setup",[["✂️","Training, Validation and Testing","**Train** to learn, **validate** to tune, **test** to judge the final model."],["🏷️","Supervised Learning","Learning from **labelled examples** where the right answer is known."]]],
+["📈","Regression",[["📉","Linear Regression","Fits a **straight line** to predict a number from inputs."],["〰️","Polynomial Regression","Fits a **curved line** to capture non-linear trends."]]],
+["🗳️","Classification",[["🧮","Logistic Regression","Predicts the **probability** of a class, such as yes or no."],["🌳","Decision Tree","Asks a series of **if–else questions** to reach a decision."],["📍","K-Nearest Neighbors (KNN)","Labels a point by the **majority of its closest neighbours**."],["🎲","Naïve Bayes","Uses **probability**, assuming features are independent, to pick a class."]]],
+["📊","Model Evaluation",[["✅","Accuracy","Share of **all predictions** that were correct."],["🎯","Precision","Of predicted positives, how many were **truly positive**."],["🔍","Recall","Of actual positives, how many the model **managed to find**."],["⚖️","F1-Score","One score that **balances precision and recall**."],["🧩","Confusion Matrix","A table of **correct and wrong predictions** for each class."]]],
+["💼","Case Studies",[["🏠","House Price Prediction using Linear Regression","Predict a home’s price from **size, location and rooms**."],["📧","Spam Email Classification","Label emails as **spam or not spam** using their words."]]]]},
+{id:"IV",c:"#059669",name:"Unsupervised Learning and Advanced Machine Learning Techniques",h:"09 Hours",
+flow:"🔗 <b>How it connects:</b> Unlabelled data → Clustering or Association rules → Reduce features (PCA / selection) → Check with cluster metrics → Apply in case studies.",
+g:[["🧭","Foundations",[["🧭","Introduction to Unsupervised Learning","Finding **hidden patterns** in data that has no labels."],["🧲","Clustering Fundamentals","Grouping **similar items together** so groups differ from each other."]]],
+["🔵","Clustering Algorithms",[["🎯","K-Means Clustering","Picks **K centres** and assigns every point to the nearest one."],["🌿","Hierarchical Clustering","Builds a **tree of clusters** by merging or splitting groups."],["🌐","DBSCAN","Groups **dense regions** of points and marks isolated ones as noise."]]],
+["🛒","Association Rules",[["🛒","Association Rule Mining","Finds **“if A then B”** rules, like bread buyers also buy butter."]]],
+["🗜️","Reducing Features",[["🗜️","Dimensionality Reduction","**Cutting the number of features** while keeping the key information."],["🧭","Principal Component Analysis (PCA)","Creates **new combined axes** that capture the most variation."],["🎛️","Feature Selection Techniques","**Choosing the most useful features** and dropping the rest."]]],
+["📐","Evaluate and Apply",[["📐","Cluster Evaluation Metrics","Scores such as **Silhouette** that show how good the clusters are."],["🌍","Applications of Unsupervised Learning","Real uses: **segmentation, anomaly detection, recommendations**."]]],
+["💼","Case Studies",[["🧑‍🤝‍🧑","Customer Segmentation using K-Means Clustering","Group shoppers by **spending habits** for targeted marketing."],["🧺","Market Basket Analysis","Discover **items bought together** to plan offers and shelves."]]]]},
+{id:"V",c:"#d9467a",name:"Advanced Machine Learning, Model Optimization and AI Applications",h:"09 Hours",
+flow:"🔗 <b>How it connects:</b> SVM and Ensembles boost power → Tune with hyperparameters and cross validation → Balance bias vs variance → Use AI responsibly in real domains.",
+g:[["✂️","Support Vector Machines",[["✂️","Support Vector Machines (SVM)","Draws the **best boundary** with the widest margin between classes."]]],
+["🧩","Ensemble Methods",[["🤝","Ensemble Learning","Combining **many models** to get one stronger prediction."],["🎒","Bagging and Boosting","Bagging trains models **in parallel**; boosting trains them **one by one**, fixing errors."],["🌲","Random Forest","Many **decision trees** vote together for the final answer."],["🚀","AdaBoost","Boosting that gives **more weight to wrongly predicted** samples each round."]]],
+["🎮","Reinforcement Learning",[["🎮","Introduction to Reinforcement Learning","An agent learns by **trial and error** using rewards and penalties."]]],
+["🔧","Model Optimization",[["🎚️","Hyperparameter Tuning","**Adjusting settings** chosen before training to improve performance."],["🔁","Cross Validation Techniques","Testing on **several data splits** for a more reliable score."],["⚖️","Bias-Variance Tradeoff","Balancing **underfitting** (too simple) against **overfitting** (too complex)."]]],
+["🛡️","Ethical AI",[["🛡️","Ethical and Responsible AI","Building AI that is **fair, transparent, private** and safe."]]],
+["🌍","AI Applications",[["🏥","AI Applications in Healthcare","Helps with **disease detection** and treatment planning."],["💳","AI Applications in Finance","Supports **credit scoring, trading** and fraud spotting."],["🔐","AI Applications in Cybersecurity","**Detects threats** and malware automatically."],["🏙️","AI Applications in Smart Systems","Powers **smart homes and traffic** systems that adapt on their own."]]],
+["💼","Case Studies",[["🕵️","Fraud Detection System","Spots **unusual transactions** that look like fraud."],["🩺","AI-based Healthcare Analytics","Uses patient data to **predict risks** and support doctors."]]]]}
+];
+const W=1500,CW=330,CH=72,GAP=10,GG=26,B=s=>s.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+const bez=(a,b,c,d)=>{const m=(a+c)/2;return `M${a} ${b}C${m} ${b},${m} ${d},${c} ${d}`};
+let cur=0;
+function draw(i){
+  cur=i;const u=U[i],g=u.g,cnt=g.map(x=>x[2].length),tot=cnt.reduce((a,b)=>a+b,0);
+  let k=1,best=1e9,s=0;for(let j=0;j<g.length-1;j++){s+=cnt[j];const d=Math.abs(tot-2*s);if(d<best){best=d;k=j+1}}
+  const sides=[g.slice(0,k).map((x,j)=>[x,j]),g.slice(k).map((x,j)=>[x,j+k])];
+  const gh=x=>x[0][2].length*(CH+GAP)-GAP;
+  const sh=a=>a.reduce((t,x)=>t+gh(x),0)+(a.length-1)*GG;
+  const H=Math.max(sh(sides[0]),sh(sides[1]))+100,cx=W/2,cy=H/2;
+  let svg="",html="";
+  html+=`<div class="n ctr" style="left:${cx-110}px;top:${cy-110}px;width:220px;height:220px"><div style="font-size:2rem">🧠</div><b>Machine Learning</b><small>Unit ${u.id} · ${u.h}</small></div>`;
+  sides.forEach((a,si)=>{
+    const dir=si?-1:1;let y=cy-sh(a)/2;
+    a.forEach(([x,idx])=>{
+      const h=gh([x]),gy=y+h/2,gx=cx+dir*265;
+      svg+=`<path d="${bez(cx+dir*108,cy,gx-dir*95,gy)}" stroke="${u.c}" stroke-width="5" fill="none" opacity=".75"/>`;
+      html+=`<div class="n grp" style="left:${gx-95}px;top:${gy-27}px;width:190px;height:54px"><i>${idx+1}</i>${x[0]} ${x[1]}</div>`;
+      x[2].forEach((t,j)=>{
+        const ty=y+j*(CH+GAP),tcx=cx+dir*(365+(si?CW:0));
+        const ex=cx+dir*365+(si?0:0);
+        svg+=`<path d="${bez(gx+dir*95,gy,ex,ty+CH/2)}" stroke="${u.c}" stroke-width="2.5" fill="none" opacity=".6"/>`;
+        html+=`<div class="n card" style="left:${si?ex-CW:ex}px;top:${ty}px;width:${CW}px;height:${CH}px"><span class="ic">${t[0]}</span><div><h4>${t[1]}</h4><p>${B(t[2])}</p></div></div>`;
+      });
+      y+=h+GG;
+    });
+  });
+  const m=document.getElementById("map");
+  m.style.cssText=`--c:${u.c};width:${W}px;height:${H}px`;
+  m.innerHTML=`<svg width="${W}" height="${H}">${svg}</svg>${html}`;
+  document.documentElement.style.setProperty("--c",u.c);
+  document.getElementById("flow").innerHTML=u.flow;
+  document.getElementById("flow").style.setProperty("--c",u.c);
+  [...document.querySelectorAll(".tabs button")].forEach((b,j)=>b.classList.toggle("on",j==i));
+  fit();
+}
+function fit(){
+  const m=document.getElementById("map"),w=document.getElementById("wrap"),s=Math.min(1,(w.clientWidth)/W);
+  m.style.transform=`scale(${s})`;w.style.height=(m.offsetHeight*s+10)+"px";
+}
+document.getElementById("tabs").innerHTML=U.map((u,i)=>`<button style="--c:${u.c}" onclick="draw(${i})">Unit ${u.id}: ${u.name.split(" and ")[0]}</button>`).join("");
+addEventListener("resize",fit);draw(0);
+</script></body></html>
