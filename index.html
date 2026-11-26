@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIML mind map</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--ink:#16202e;--ink2:#566275;--line:#c9d1dc;--chip:#e8edf3}
+@media (prefers-color-scheme:dark){:root{--bg:#10151c;--card:#171e28;--ink:#e6ebf2;--ink2:#9aa6b8;--line:#334052;--chip:#222c3a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:920px;margin:0 auto;padding:32px 20px 64px}
+h1{font-size:28px;line-height:1.25;margin:0 0 6px;font-weight:600}
+.sub{color:var(--ink2);margin:0 0 24px;max-width:60ch}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+input[type=search]{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+button{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+button:hover{background:var(--chip)}
+:focus-visible{outline:2px solid #378add;outline-offset:2px}
+.root{display:inline-block;padding:10px 16px;background:var(--ink);color:var(--bg);border-radius:8px;font-weight:600;margin-bottom:14px}
+ul{list-style:none;margin:0;padding:0}
+ul ul{margin-left:11px;padding-left:20px;border-left:1.5px solid var(--line)}
+li{padding:4px 0}
+li.hide{display:none}
+.row{display:flex;gap:8px;align-items:baseline;padding:2px 4px;border-radius:6px}
+.row.has{cursor:pointer}
+.row.has:hover{background:var(--chip)}
+.arr{flex:none;width:14px;text-align:center;font-size:12px;color:var(--ink2);transition:transform .15s}
+.closed>.row .arr{transform:rotate(-90deg)}
+.closed>ul{display:none}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;align-self:center;background:var(--c)}
+.nm{font-weight:600}
+.ds{color:var(--ink2);font-size:14px}
+.unit{--c:#888}
+ul.top>li{margin-bottom:10px;padding:8px 10px 8px 12px;background:var(--card);border-radius:10px;border-left:4px solid var(--c)}
+ul.top>li>.row .nm{font-size:17px}
+mark{background:#ffe38a;color:#16202e;border-radius:3px}
+.note{margin-top:28px;color:var(--ink2);font-size:13px}
+@media print{.bar{display:none}.closed>ul{display:block}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Artificial intelligence and machine learning</h1>
+<p class="sub">A single mind map of the full syllabus, five units, from agents and search to ensembles and responsible AI. Click a topic to fold or unfold it.</p>
+<div class="bar">
+<input type="search" id="q" placeholder="Search topics, e.g. PCA" aria-label="Search topics">
+<button id="exp">Expand all</button>
+<button id="col">Collapse all</button>
+<button id="prt">Print</button>
+</div>
+<div class="root">AIML</div>
+<div id="tree"></div>
+<p class="note">Tip: Print works as a revision sheet because every branch is opened automatically.</p>
+</div>
+<script>
+const COL=['#7F77DD','#1D9E75','#D85A30','#D4537E','#378ADD'];
+const T=[
+['Unit I: Introduction to AI and intelligent agents','Foundations of AI and how agents behave',[
+['Introduction to AI and AIML','Machines performing tasks that need human-like intelligence',[]],
+['History and evolution of AI','Turing test, Dartmouth 1956, AI winters, deep learning boom',[]],
+['Types of AI','Classified by capability',[
+['ANI (narrow AI)','Does one task well; all AI today',[]],
+['AGI (general AI)','Human-level reasoning across tasks; theoretical',[]],
+['ASI (super AI)','Surpasses human intelligence; hypothetical',[]]]],
+['AI vs ML vs DL vs data science','How the fields relate',[
+['AI','Broad goal of intelligent machines',[]],
+['ML','Subset of AI that learns from data',[]],
+['DL','Subset of ML using deep neural networks',[]],
+['Data science','Extracting insights from data',[]]]],
+['Intelligent agents','Entity that senses and acts on an environment',[
+['Agent environment and PEAS','Performance, Environment, Actuators, Sensors',[]],
+['Types of agents','Increasing in intelligence',[
+['Simple reflex agent','Acts on current percept using rules',[]],
+['Model-based agent','Keeps internal state of the world',[]],
+['Goal-based agent','Chooses actions to reach a goal',[]],
+['Utility-based agent','Picks the action with best outcome value',[]],
+['Learning agent','Improves its performance from experience',[]]]]]],
+['Applications of AI','AI across domains',[
+['Healthcare','Diagnosis, imaging, drug discovery',[]],
+['Education','Personalised learning, auto-grading',[]],
+['Finance','Fraud detection, trading, credit scoring',[]],
+['Agriculture','Crop monitoring, yield prediction',[]],
+['Industry 4.0','Smart factories, predictive maintenance',[]]]],
+['Challenges and future of AI','Bias, privacy, safety, jobs; trend toward AGI and responsible AI',[]]]],
+
+['Unit II: Problem solving, search and knowledge representation','How AI finds solutions and stores knowledge',[
+['Problem formulation and state space','Initial state, actions, transition model, goal test, path cost',[]],
+['Search strategies','Ways to explore the state space',[
+['Uninformed search','No extra knowledge about the goal',[
+['Breadth first search (BFS)','Explores level by level; finds shallowest goal',[]],
+['Depth first search (DFS)','Goes deep first; low memory, not optimal',[]],
+['Uniform cost search','Expands the cheapest path cost first',[]]]],
+['Informed search','Uses heuristics to guide search',[
+['Heuristic search','Estimates distance to the goal',[]],
+['Greedy best first search','Expands node closest to goal by heuristic',[]],
+['A* search','Combines path cost and heuristic: f = g + h',[]]]],
+['Local search and hill climbing','Moves to better neighbours; can get stuck at local maxima',[]]]],
+['Knowledge representation','Encoding facts so machines can reason',[
+['Propositional logic','True/false statements joined by logical operators',[]],
+['Predicate logic','Adds objects, relations and quantifiers',[]],
+['Inference methods','Deriving new facts from rules',[
+['Forward chaining','Data-driven: facts to conclusions',[]],
+['Backward chaining','Goal-driven: goal back to facts',[]]]]]],
+['Introduction to expert systems','Knowledge base plus inference engine mimicking a human expert',[]]]],
+
+['Unit III: ML fundamentals and supervised learning','Learning from labelled data',[
+['Introduction to machine learning','Systems that learn patterns from data without explicit rules',[]],
+['ML workflow and lifecycle','Collect, prepare, train, evaluate, deploy, monitor',[]],
+['Data collection and dataset preparation','Gathering and organising relevant data',[]],
+['Data preprocessing','Cleaning data before training',[
+['Handling missing values','Remove, or fill with mean/median/mode',[]],
+['Feature scaling','Normalisation and standardisation',[]],
+['Encoding techniques','Label and one-hot encoding for categories',[]]]],
+['Training, validation and testing','Data split to fit, tune and fairly assess a model',[]],
+['Supervised learning','Learns from input-output pairs',[
+['Regression','Predicts continuous values',[
+['Linear regression','Fits a straight-line relationship',[]],
+['Polynomial regression','Fits curved relationships',[]]]],
+['Classification','Predicts categories',[
+['Logistic regression','Probability-based binary classifier',[]],
+['Decision tree','Splits data using feature-based rules',[]],
+['K-nearest neighbors (KNN)','Votes among the closest data points',[]],
+['Naive Bayes','Bayes theorem with independence assumption',[]]]]]],
+['Model evaluation','Measuring classifier performance',[
+['Accuracy','Share of all predictions that are correct',[]],
+['Precision','Correct positives among predicted positives',[]],
+['Recall','Correct positives among actual positives',[]],
+['F1-score','Harmonic mean of precision and recall',[]],
+['Confusion matrix','Table of TP, FP, TN, FN counts',[]]]]]],
+
+['Unit IV: Unsupervised learning and advanced ML techniques','Finding structure in unlabelled data',[
+['Introduction to unsupervised learning','No labels; discovers hidden patterns',[]],
+['Clustering','Grouping similar data points',[
+['Clustering fundamentals','Similarity and distance measures',[]],
+['K-means clustering','Assigns points to K centroids iteratively',[]],
+['Hierarchical clustering','Builds a tree (dendrogram) of clusters',[]],
+['DBSCAN','Density-based; finds arbitrary shapes and noise',[]],
+['Cluster evaluation metrics','Silhouette score, Davies-Bouldin index',[]]]],
+['Association rule mining','Finds items that occur together (support, confidence, lift)',[]],
+['Dimensionality reduction','Reducing the number of features',[
+['Principal component analysis (PCA)','Projects data onto top-variance components',[]],
+['Feature selection techniques','Keeps only the most relevant features',[]]]],
+['Applications of unsupervised learning','Segmentation, anomaly detection, recommendations',[]]]],
+
+['Unit V: Advanced ML, model optimization and AI applications','Powerful models, tuning and responsible use',[
+['Support vector machines (SVM)','Finds the maximum-margin separating hyperplane',[]],
+['Ensemble learning','Combines multiple models for better accuracy',[
+['Bagging','Trains models in parallel on random samples',[
+['Random forest','Many decision trees voting together',[]]]],
+['Boosting','Trains models sequentially to fix errors',[
+['AdaBoost','Reweights misclassified samples each round',[]]]]]],
+['Introduction to reinforcement learning','Agent learns by rewards and penalties',[]],
+['Model optimization','Making models perform better',[
+['Hyperparameter tuning','Grid search, random search',[]],
+['Cross validation techniques','K-fold, leave-one-out',[]],
+['Bias-variance tradeoff','Balancing underfitting and overfitting',[]]]],
+['Ethical and responsible AI','Fairness, transparency, privacy, accountability',[]],
+['AI applications','Real-world deployment areas',[
+['Healthcare','Diagnosis and patient analytics',[]],
+['Finance','Risk, fraud and forecasting',[]],
+['Cybersecurity','Threat and intrusion detection',[]],
+['Smart systems','Smart homes, cities and IoT',[]]]]]]
+];
+
+function build(list,depth,color){
+  const ul=document.createElement('ul');
+  if(depth===0)ul.className='top';
+  list.forEach((n,i)=>{
+    const c=depth===0?COL[i]:color;
+    const li=document.createElement('li');
+    li.style.setProperty('--c',c);
+    li.dataset.t=(n[0]+' '+n[1]).toLowerCase();
+    const has=n[2].length>0;
+    const row=document.createElement('div');
+    row.className='row'+(has?' has':'');
+    if(has){row.tabIndex=0;row.setAttribute('role','button');}
+    const arr=document.createElement('span');arr.className='arr';arr.textContent=has?'\u25BE':'';
+    const dot=document.createElement('span');dot.className='dot';
+    const txt=document.createElement('span');
+    const nm=document.createElement('span');nm.className='nm';nm.textContent=n[0];
+    const ds=document.createElement('span');ds.className='ds';ds.textContent=' \u2013 '+n[1];
+    txt.append(nm,ds);
+    row.append(arr,dot,txt);
+    li.appendChild(row);
+    if(has){
+      li.appendChild(build(n[2],depth+1,c));
+      const tog=()=>li.classList.toggle('closed');
+      row.onclick=tog;
+      row.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}};
+    }
+    ul.appendChild(li);
+  });
+  return ul;
+}
+document.getElementById('tree').appendChild(build(T,0));
+
+const all=()=>document.querySelectorAll('#tree li');
+function setAll(open){all().forEach(li=>{if(li.querySelector(':scope>ul'))li.classList.toggle('closed',!open);});}
+document.getElementById('exp').onclick=()=>setAll(true);
+document.getElementById('col').onclick=()=>setAll(false);
+document.getElementById('prt').onclick=()=>{setAll(true);window.print();};
+
+function filter(q){
+  q=q.trim().toLowerCase();
+  const rec=li=>{
+    const kids=[...li.querySelectorAll(':scope>ul>li')];
+    let any=false;
+    kids.forEach(k=>{if(rec(k))any=true;});
+    const self=!q||li.dataset.t.includes(q);
+    const show=self||any;
+    li.classList.toggle('hide',!show);
+    if(q&&kids.length)li.classList.toggle('closed',!any&&!self);
+    return show;
+  };
+  document.querySelectorAll('#tree>ul>li').forEach(rec);
+  document.querySelectorAll('#tree li').forEach(li=>{
+    if(!q)return;
+    if(li.dataset.t.includes(q)){
+      const p=li.parentElement.closest('li');
+      let n=p;while(n){n.classList.remove('closed');n=n.parentElement.closest('li');}
+    }
+  });
+}
+document.getElementById('q').addEventListener('input',e=>{
+  if(!e.target.value.trim())setAll(true);
+  filter(e.target.value);
+});
+</script>
+</body>
+</html>
